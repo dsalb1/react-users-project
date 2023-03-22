@@ -10,3 +10,12 @@
 	font-weight: bold;
 	color: black;
 }
+
+input.invalid {
+	border: 2px solid red;
+	background-color: rgb(240, 165, 156);
+}
+
+label.invalid {
+	color: red;
+}
