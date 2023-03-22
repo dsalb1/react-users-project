@@ -1,0 +1,17 @@
+.button {
+	background-color: purple;
+	border-color: purple;
+	color: white;
+	padding: 5px 8px;
+	width: 100%;
+}
+
+.button:hover {
+	cursor: pointer;
+}
+
+@media (min-width: 768px) {
+	.button {
+		width: auto;
+	}
+}
