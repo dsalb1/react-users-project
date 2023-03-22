@@ -1,0 +1,40 @@
+.error-modal div {
+	padding: 15px;
+	margin: 20% auto;
+	max-width: 768px;
+	display: block;
+	overflow: auto;
+	border-radius: 10px;
+	background: white;
+}
+
+/* .error-modal button {
+	margin: 15px;
+} */
+
+.error-modal p {
+	margin: 30px auto;
+}
+
+.error-modal h2 {
+	margin: -15px -15px 0 -15px;
+	padding: 15px;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	background-color: purple;
+	color: white;
+
+}
+
+.overlay {
+	padding: 20px;
+	position: fixed;
+    inset: 0px;
+    background-color: rgba(0,0,0,0.6);
+}
+
+@media (min-width: 768px) {
+	.error-modal button {
+		float: right;
+	}
+}
