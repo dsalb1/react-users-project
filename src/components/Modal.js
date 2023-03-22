@@ -4,7 +4,7 @@ import ReactModal from "react-modal";
 import Button from "./Button";
 import styles from "./Modal.module.css";
 
-ReactModal.setAppElement('#root');
+ReactModal.setAppElement('#overlay-root');
 
 const Modal = (props) => {
 	return (

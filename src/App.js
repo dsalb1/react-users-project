@@ -26,14 +26,14 @@ function App() {
   }
 
 	return (
-		<div>
+		<>
 			<section id="user-form">
 				<UserForm onSubmitHandler={addUserHandler} />
 			</section>
       <section id="users">
         {content}
       </section>
-		</div>
+    </>
 	);
 }
 

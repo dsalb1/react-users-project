@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import Button from './Button';
 import Modal from './Modal';
@@ -6,32 +6,25 @@ import Modal from './Modal';
 import styles from "./UserForm.module.css";
 
 const UserForm = (props) => {
-    const [enteredUsername, setEnteredUsername] = useState('');
-    const [enteredNumber, setEnteredNumber] = useState('');
+    const nameInputRef = useRef();
+    const ageInputRef = useRef();
+
     const [displayModal, setDisplayModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const modalHeading = "Invalid input";
-
-    const usernameHandler = event => {
-        setEnteredUsername(event.target.value);
-    }
-
-    const numberHandler = event => {
-        setEnteredNumber(event.target.value);
-    }
 
     const closeModalHandler = () => {
         setDisplayModal(false);
         setErrorMessage('');
     }
 
-    const validateInput = () => {
+    const validateInput = (name, age) => {
         /* returns true if input is valid, false if invalid */
-        if (enteredNumber.trim().length === 0 || enteredUsername.trim().length === 0) {
+        if (name.trim().length === 0 || age.trim().length === 0) {
             setDisplayModal(true);
             setErrorMessage('Please enter a valid name and age (non-empty values).');
             return false;
-        } else if (+enteredNumber < 0) {
+        } else if (+age.value < 0) {
             setDisplayModal(true);
             setErrorMessage('Please enter a valid age (> 0).');
             return false;
@@ -41,24 +34,27 @@ const UserForm = (props) => {
 
     const addUserHandler = event => {
         event.preventDefault();
-        if (!validateInput()) {return;}
+        const enteredName = nameInputRef.current.value;
+        const enteredUserAge = ageInputRef.current.value;
+
+        if (!validateInput(enteredName, enteredUserAge)) {return;}
         const newUser = {
-            username: enteredUsername,
-            age: enteredNumber,
+            username: enteredName,
+            age: enteredUserAge,
             id: Math.random().toString()
         }
         props.onSubmitHandler(newUser);
-        setEnteredNumber('');
-        setEnteredUsername('');
+        ageInputRef.current.value = '';
+        nameInputRef.current.value = '';
     }
 
     return (
-        <div>
+        <>
             <form onSubmit={addUserHandler} className={styles['form-control']}>
                 <label htmlFor="username">Username</label>
-                <input type="text" name="username" value={enteredUsername} onChange={usernameHandler}></input>
-                <label htmlFor="number">Age (Years)</label>
-                <input type="number" name="age" value={enteredNumber} onChange={numberHandler}></input>
+                <input type="text" name="username" ref={nameInputRef}></input>
+                <label htmlFor="age">Age (Years)</label>
+                <input type="age" name="age" ref={ageInputRef}></input>
                 <Button type="submit">Add User</Button>
             </form>
             <Modal
@@ -67,7 +63,7 @@ const UserForm = (props) => {
                 onClick={closeModalHandler}
                 error={errorMessage}
             />
-        </div>
+        </>
     )
 }
 
